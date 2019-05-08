@@ -10,11 +10,9 @@ void main(){
 	clock_t start_t,end_t,total_t;
 	int tamano2,respuesta=1;
 	float tiempo_insertar=0;
-	float tiempo_buscar=0;	
-	float aux=0;
-	int tamano = 1000,max = 100000, unNumero,i=0,p,opcion,dato,pasadas=1,pausa=0;
-	
-	char salir;
+	float tiempo_buscar=0;
+	float aux;	
+	int tamano = 1000,max = 1000, unNumero,i=0,opcion,pasadas=1,pausa=0;
 	srand(time(NULL));
 	
    
@@ -137,7 +135,7 @@ void main(){
 //SEGUNDO LABORATORIO
 			
 			printf("1.-Insertar al final y buscar secuencialmente\n2.-Insertar en orden y usar busqueda binaria\n3.-Insertar siempre al final, ordenar despúes de cada inserción y usar busqueda binaria\n ");
-			printf("\n4.-Caso de prueba busqueda binaria (caso peor) con un arreglo de tama�o 500.000.000.000");
+			printf("\n4.-Caso de prueba busqueda binaria (caso peor) con un arreglo de tama�o 6.000.000.000)");
 			printf("\nOpcion=");
 			scanf("%i",&opcion);
 			switch(opcion){
@@ -145,7 +143,7 @@ void main(){
 //1.- Insertar al final y buscar secuencialmente.
 //Se llama al módulo creaListaNumerosVacia y se almacena la lista creada en la variable de tipo estructura "nuevaLista".
 				system("clear");
-				while(pasadas <= 50){ // se cuentan 50iteraciones de tamaño 100000
+				while(pasadas <= 1000){ // se cuentan 1000 iteraciones de tamaño 10000
 					
 					ListaNumeros *lista1 = creaListaNumerosVacia(tamano);
 					//Inserta numeros al final en un arreglo hasta completarlo (el número '0' da a entender que la casilla está vacía).			
@@ -176,7 +174,7 @@ void main(){
 					guardarEnArchivo(pasadas,tamano,tiempo_insertar,tiempo_buscar,1);
 					printf("\npasadas: %i\ntamano: %i\ntiempo insercion: %f [Mseg]\ntiempo busqueda: %f [Mseg]\n\n", pasadas,tamano, tiempo_insertar, tiempo_buscar);
 					pasadas++;
-					tamano = tamano + 1000000; //el tamaño maximo posible fue de 6.400.000 o se congela el proceso
+					tamano = tamano + 10000; //el tamaño maximo posible fue de 6.400.000 o se congela el proceso
 				}	
 				;break;
 				
@@ -204,8 +202,8 @@ void main(){
 
 					start_t=clock(); 	/*inicia cronometro busqueda binaria.*/
 					
-					aux2=busquedaBinaria(lista1,unNumero);
-					if(aux2==1){
+					
+					if(busquedaBinaria(lista1,unNumero)){
 						printf("\nNumero %i encontrado\n", unNumero);
 					}else{
 						printf("\nEl numero %i no ha sido encontrado\n",unNumero);
@@ -224,7 +222,7 @@ void main(){
 					//printf("\n");
 					//scanf("%i",&pausa);
 					pasadas++;
-					tamano = tamano + 1000; /*el tamaño maximo posible fue de 6.400.000 o se congela el proceso*/
+					tamano = tamano + 1000; 
 				}
 				;break;
 				
@@ -264,7 +262,7 @@ void main(){
 					
 					}
 					else{
-						printf("\nPrimero llene el arreglo de numeros");
+						printf("\nEl arreglo esta lleno");
 					}
 					printf("\npasadas: %i\ntamano: %i\ntiempo insercion: %f [Mseg]\ntiempo busqueda: %f [Mseg]\n\n",pasadas,tamano, tiempo_insertar, tiempo_buscar);
 					
@@ -274,23 +272,22 @@ void main(){
 				}
 					;break;
 				case 4:
-					lista2=creaListaNumerosordenados(50000000000);
+					lista2=creaListaNumerosordenados(6000000000);
 					
 					unNumero=-1;
 					
 					start_t=clock();
-					aux=busquedaBinaria(lista2,unNumero);
-					end_t=clock();
-					total_t=(end_t-start_t);
-					aux=total_t;
-					aux=aux;
-					printf("\ntiempo busqueda= %f",aux);
-					
-					if(aux==1){
+					if(busquedaBinaria(lista2,unNumero)){
 						printf("\nNúmero %i encontrado\n", unNumero);
 					}else{
 						printf("\nEl número %i no ha sido encontrado\n",unNumero);
 					}
+					end_t=clock();
+					total_t=(end_t-start_t);
+					aux=total_t;
+					printf("\ntiempo busqueda= %f",aux);
+					
+					
 					
 					
 
